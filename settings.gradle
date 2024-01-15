@@ -1,1 +1,4 @@
-rootProject.name = 'spring-boot-starter-i18n'
+rootProject.name = 'spring-boot-starter-i18n-build'
+
+include "spring-boot-starter-i18n"
+include "spring-boot-starter-i18n-sample"

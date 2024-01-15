@@ -1,25 +1,39 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.2.1'
+	id 'org.springframework.boot' version "$springbootVersion"
 	id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'org.springframework.boot.i18n'
-version = '0.0.1-SNAPSHOT'
-
-java {
-	sourceCompatibility = '17'
-}
-
 repositories {
+	mavenLocal()
+	maven { url "https://repo1.maven.org/maven2/" }
 	mavenCentral()
+	jcenter()
+
+
 }
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+subprojects{
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+	apply plugin: 'idea'
+
+	group = 'org.springframework.boot.i18n'
+	version = project.getProperty('version')
+	sourceCompatibility = '17'
+
+
+	repositories {
+		mavenLocal()
+		maven { url "https://repo.maven.apache.org/maven2/" }
+		maven { url "https://repo1.maven.org/maven2/" }
+		mavenCentral()
+		jcenter()
+
+
+	}
+
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
-}
+bootJar { enabled = false}
+

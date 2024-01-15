@@ -1,0 +1,7 @@
+{
+  "component" : "test",
+  "messages" : {
+	"test_abc_msg": "this is en message NodeJS Sample Application."
+ },
+  "locale" : "en"
+}
