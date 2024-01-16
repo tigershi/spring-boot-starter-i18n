@@ -15,4 +15,5 @@ public @interface I18nVal {
      * The actual value expression such as <code>${my.app.i18n.key}</code>.
      */
     String value();
+    String component() default "default";
 }
