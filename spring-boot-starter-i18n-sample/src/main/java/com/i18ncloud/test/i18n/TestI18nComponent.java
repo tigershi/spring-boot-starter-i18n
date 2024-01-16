@@ -1,4 +1,4 @@
-package com.vmware.l10agent.i18n;
+package com.i18ncloud.test.i18n;
 
 import lombok.Data;
 import lombok.Getter;

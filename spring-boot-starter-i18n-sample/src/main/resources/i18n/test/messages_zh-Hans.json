@@ -1,0 +1,12 @@
+{
+  "component" : "test",
+  "messages" : {
+    "test_bcd_msg" : "这是测试 bcd 信息",
+    "test_def_msg" : "这是测试 def 信息",
+    "test_abc_msg" : "这是测试 abc 信息",
+    "test_cde_msg" : "这是测试 cde 信息",
+    "abc.ss.dd": "这是测试 i18n value 信息"
+
+ },
+  "locale" : "zh-Hans"
+}

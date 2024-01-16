@@ -1,4 +1,4 @@
-package com.vmware.l10agent;
+package com.i18ncloud.test;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

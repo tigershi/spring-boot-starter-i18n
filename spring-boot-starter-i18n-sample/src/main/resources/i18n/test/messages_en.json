@@ -1,7 +1,12 @@
 {
   "component" : "test",
   "messages" : {
-	"test_abc_msg": "this is en message NodeJS Sample Application."
+    "test_bcd_msg" : "this is test bcd message translation",
+    "test_def_msg" : "this is test def message translation",
+    "test_abc_msg" : "this is test abc message translation",
+    "test_cde_msg" : "this is test cde message translation",
+    "abc.ss.dd": "this is i18n value translation"
+
  },
   "locale" : "en"
 }

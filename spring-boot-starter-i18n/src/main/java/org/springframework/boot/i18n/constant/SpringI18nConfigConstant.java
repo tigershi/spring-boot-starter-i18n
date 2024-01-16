@@ -12,6 +12,7 @@ public interface SpringI18nConfigConstant {
     public final static String SPRING_I18N_CONFIG_TRANSLATION_COLLECT_DIR="spring.i18n.config.translation.collection.dir";
     public final static String SPRING_I18N_CONFIG_TRANSLATION_COLLECT_DEFAULT_DIR = "file:i18n";
     public final static String SPRING_I18N_CONFIG_TRANSLATION_COLLECT_FILE_NAME = "messages_latest.json";
+    public final static String SPRING_I18N_CONFIG_TRANSLATION_EXCLUDE_PREFIX = "org.springframework.";
 
 
 
@@ -30,5 +31,7 @@ public interface SpringI18nConfigConstant {
 
 
     public static final String DEFAULT = "default";
+    public static final String TRUE_STR = "true";
+
 
 }
