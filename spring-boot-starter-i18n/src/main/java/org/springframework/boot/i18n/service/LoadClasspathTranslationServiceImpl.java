@@ -1,6 +1,5 @@
 package org.springframework.boot.i18n.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.TreeMap;
 
 public class LoadClasspathTranslationServiceImpl extends LoadBaseTranslationServiceImpl {
     private static final Log logger = LogFactory.getLog(LoadClasspathTranslationServiceImpl.class);

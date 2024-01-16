@@ -18,6 +18,7 @@ import java.util.Properties;
 
 public class LoadFileTranslationServiceImpl extends LoadBaseTranslationServiceImpl {
     private static final Log logger = LogFactory.getLog(LoadFileTranslationServiceImpl.class);
+
     @Override
     public Map<String, TranslationMsg> loadLocaleTranslations(SpringI18nConfig config) {
         return getFilePathTranslations(new File(config.getTranslationBaseDir()), config.getLanguage());

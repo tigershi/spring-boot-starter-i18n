@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class LoadBaseTranslationServiceImpl implements LoadTranslationService{
+public abstract class LoadBaseTranslationServiceImpl implements LoadTranslationService {
     private static final Log logger = LogFactory.getLog(LoadBaseTranslationServiceImpl.class);
 
     protected ObjectMapper mapper = new ObjectMapper();

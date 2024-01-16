@@ -19,12 +19,13 @@ import java.util.Map;
 
 public class InitI18nComponentListener implements ApplicationListener<ContextRefreshedEvent> {
     private static final Log logger = LogFactory.getLog(InitI18nComponentListener.class);
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         String baseDir = event.getApplicationContext().getEnvironment()
-                .getProperty(SpringI18nConfigConstant.SPRING_I18N_CONFIG_TRANSLATION_DIR,SpringI18nConfigConstant.SPRING_I18N_CONFIG_TRANSLATION_DEFAULT_DIR);
+                .getProperty(SpringI18nConfigConstant.SPRING_I18N_CONFIG_TRANSLATION_DIR, SpringI18nConfigConstant.SPRING_I18N_CONFIG_TRANSLATION_DEFAULT_DIR);
         String localeStr = event.getApplicationContext().getEnvironment()
-                .getProperty(SpringI18nConfigConstant.SPRING_I18N_CONFIG_TRANSLATION_LOCALE,SpringI18nConfigConstant.SPRING_I18N_CONFIG_TRANSLATION_DEFAULT_LOCALE);
+                .getProperty(SpringI18nConfigConstant.SPRING_I18N_CONFIG_TRANSLATION_LOCALE, SpringI18nConfigConstant.SPRING_I18N_CONFIG_TRANSLATION_DEFAULT_LOCALE);
         String collectEnable = event.getApplicationContext().getEnvironment()
                 .getProperty(SpringI18nConfigConstant.SPRING_I18N_CONFIG_TRANSLATION_COLLECT_ENABLE, "false");
         String collectDir = event.getApplicationContext().getEnvironment()
@@ -37,41 +38,38 @@ public class InitI18nComponentListener implements ApplicationListener<ContextRef
         springI18nConfig.setCollectFileDir(collectDir);
 
 
-        Map<String, Object> I18nComponentMap =  event.getApplicationContext().getBeansWithAnnotation(I18nComponent.class);
+        Map<String, Object> I18nComponentMap = event.getApplicationContext().getBeansWithAnnotation(I18nComponent.class);
 
-        Map<String, Object> mapComps =  event.getApplicationContext().getBeansWithAnnotation(Component.class);
+        Map<String, Object> mapComps = event.getApplicationContext().getBeansWithAnnotation(Component.class);
         Map<String, Object> i18ValMap = new HashMap<>();
-        for (Map.Entry<String, Object> entry : mapComps.entrySet()){
+        for (Map.Entry<String, Object> entry : mapComps.entrySet()) {
             String key = entry.getKey();
-            if(!I18nComponentMap.containsKey(key) && !key.startsWith(SpringI18nConfigConstant.SPRING_I18N_CONFIG_TRANSLATION_EXCLUDE_PREFIX)){
+            if (!I18nComponentMap.containsKey(key) && !key.startsWith(SpringI18nConfigConstant.SPRING_I18N_CONFIG_TRANSLATION_EXCLUDE_PREFIX)) {
                 i18ValMap.put(key, entry.getValue());
             }
         }
         logger.debug("the contain i18n value java bean object size: " + i18ValMap.size());
 
-        if (springI18nConfig.isCollectEnable()){
+        if (springI18nConfig.isCollectEnable()) {
             CollectSourceService collectSourceService = new CollectSourceServiceImpl();
-            logger.info("begin collect i18n key value pair from i18nComponent object" );
+            logger.info("begin collect i18n key value pair from i18nComponent object");
             collectSourceService.collectSourceFromI18nObj(I18nComponentMap);
-            logger.info("begin collect i18n key value pair from i18n value java bean" );
+            logger.info("begin collect i18n key value pair from i18n value java bean");
             collectSourceService.collectSourceFromI18nVal(i18ValMap);
             collectSourceService.writeCollectedSourceToFile(springI18nConfig);
-            logger.info("collect i18n key value pair end" );
+            logger.info("collect i18n key value pair end");
         }
 
 
-
         MapI18nTranslationService mapI18nTranslationService = new MapI18nTranslationServiceImpl();
-        logger.info("map locale translation from Dir: "+baseDir+ " , locale: "+ localeStr + " to i18n component object");
+        logger.info("map locale translation from Dir: " + baseDir + " , locale: " + localeStr + " to i18n component object");
         mapI18nTranslationService.mapTranslationToI18nObj(I18nComponentMap, springI18nConfig);
 
-        logger.info("map locale translation from Dir: "+baseDir+ " , locale: "+ localeStr + " to i18n value java bean");
+        logger.info("map locale translation from Dir: " + baseDir + " , locale: " + localeStr + " to i18n value java bean");
         mapI18nTranslationService.mapTranslationToI18nVal(i18ValMap, springI18nConfig);
         logger.info("map locale translation end");
 
     }
-
-
 
 
 }
