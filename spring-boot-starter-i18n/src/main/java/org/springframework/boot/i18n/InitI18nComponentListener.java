@@ -6,10 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.i18n.annotation.I18nComponent;
 import org.springframework.boot.i18n.config.SpringI18nConfig;
 import org.springframework.boot.i18n.constant.SpringI18nConfigConstant;
-import org.springframework.boot.i18n.service.CollectSourceService;
-import org.springframework.boot.i18n.service.CollectSourceServiceImpl;
-import org.springframework.boot.i18n.service.MapI18nTranslationService;
-import org.springframework.boot.i18n.service.MapI18nTranslationServiceImpl;
+import org.springframework.boot.i18n.service.*;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -31,11 +28,20 @@ public class InitI18nComponentListener implements ApplicationListener<ContextRef
         String collectDir = event.getApplicationContext().getEnvironment()
                 .getProperty(SpringI18nConfigConstant.SPRING_I18N_CONFIG_TRANSLATION_COLLECT_DIR, SpringI18nConfigConstant.SPRING_I18N_CONFIG_TRANSLATION_COLLECT_DEFAULT_DIR);
 
+        String l10nEnable = event.getApplicationContext().getEnvironment()
+                .getProperty(SpringI18nConfigConstant.SPRING_I18N_CONFIG_L10N_ENABLE, "false");
+
+        String l10nRegion = event.getApplicationContext().getEnvironment()
+                .getProperty(SpringI18nConfigConstant.SPRING_I18N_CONFIG_L10N_REGION, "US");
+
+
         SpringI18nConfig springI18nConfig = new SpringI18nConfig();
         springI18nConfig.setTranslationBaseDir(baseDir);
         springI18nConfig.setLanguage(localeStr);
         springI18nConfig.setCollectEnable(Boolean.valueOf(collectEnable));
         springI18nConfig.setCollectFileDir(collectDir);
+        springI18nConfig.setL10nEnable(Boolean.valueOf(l10nEnable));
+        springI18nConfig.setDefaultRegion(l10nRegion);
 
 
         Map<String, Object> I18nComponentMap = event.getApplicationContext().getBeansWithAnnotation(I18nComponent.class);
@@ -68,6 +74,12 @@ public class InitI18nComponentListener implements ApplicationListener<ContextRef
         logger.info("map locale translation from Dir: " + baseDir + " , locale: " + localeStr + " to i18n value java bean");
         mapI18nTranslationService.mapTranslationToI18nVal(i18ValMap, springI18nConfig);
         logger.info("map locale translation end");
+
+
+        if (springI18nConfig.isL10nEnable()){
+            L10nInitiator.initZipCountryFlagPattern();
+            L10nLocaleFactory.initFactory(springI18nConfig);
+        }
 
     }
 

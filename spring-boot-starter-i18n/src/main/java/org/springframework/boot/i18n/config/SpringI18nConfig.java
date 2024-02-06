@@ -12,6 +12,18 @@ public class SpringI18nConfig {
     //  the language locale string
     private String language = "en";
 
+    private boolean l10nEnable = false;
+
+    private String defaultRegion = "US";
+
+    public String getDefaultRegion() {
+        return defaultRegion;
+    }
+
+    public void setDefaultRegion(String defaultRegion) {
+        this.defaultRegion = defaultRegion;
+    }
+
     public boolean isCollectEnable() {
         return collectEnable;
     }
@@ -43,5 +55,14 @@ public class SpringI18nConfig {
     public void setLanguage(String language) {
         this.language = language;
     }
+
+    public boolean isL10nEnable() {
+        return l10nEnable;
+    }
+
+    public void setL10nEnable(boolean l10nEnable) {
+        this.l10nEnable = l10nEnable;
+    }
+
 
 }
